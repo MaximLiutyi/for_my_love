@@ -19,6 +19,7 @@
         h1 {
             color: #4CAF50;
             font-size: 24px;
+            text-align: center;
         }
 
         p {
@@ -55,7 +56,7 @@
             margin-top: 20px;
         }
 
-        .result-item {
+        .question-item {
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
@@ -73,7 +74,7 @@
     N - це Ні</p>
 
     <div id="result-container">
-        <p id="question">Як гадаєш, я тебе люблю?</p>
+        <div class="question-item" id="question">Як гадаєш, я тебе люблю?</div>
         <input type="text" id="answer" maxlength="1">
         <button onclick="startQuiz()">Відповісти</button>
     </div>
@@ -82,71 +83,80 @@
         function startQuiz() {
             let path = document.getElementById('answer').value.toUpperCase();
             let resultContainer = document.getElementById('result-container');
-            let question = document.getElementById('question').textContent;
-            let newResult = document.createElement('div');
-            newResult.className = 'result-item';
+            let question = document.getElementById('question');
 
             if (path === "N") {
-                newResult.textContent = `Питання: ${question} — Відповідь: ${path}\nСонце, навіть про таке не думай) А ну пробуй ще раз)))`;
-                resultContainer.appendChild(newResult);
+                let newQuestion = document.createElement('div');
+                newQuestion.className = 'question-item';
+                newQuestion.textContent = "Сонце, навіть про таке не думай) А ну пробуй ще раз)))";
+                resultContainer.appendChild(newQuestion);
             } else if (path === "Y") {
-                newResult.textContent = `Питання: ${question} — Відповідь: ${path}\nТи права! Я безмежно тебе люблю.`;
-                resultContainer.appendChild(newResult);
+                let newQuestion = document.createElement('div');
+                newQuestion.className = 'question-item';
+                newQuestion.textContent = "Ти права! Я безмежно тебе люблю. Але чи любиш ти мене так в замін?";
+                resultContainer.appendChild(newQuestion);
 
                 setTimeout(() => {
-                    let newQuestion = document.createElement('p');
-                    newQuestion.id = 'question';
-                    newQuestion.textContent = "Але чи любиш ти мене так в замін?";
-                    resultContainer.appendChild(newQuestion);
-
+                    question = newQuestion;
                     document.getElementById('answer').value = "";
                     document.querySelector('button').onclick = function() {
                         let path_1 = document.getElementById('answer').value.toUpperCase();
-                        let newResult_1 = document.createElement('div');
-                        newResult_1.className = 'result-item';
 
                         if (path_1 === "N") {
-                            newResult_1.textContent = `Питання: ${newQuestion.textContent} — Відповідь: ${path_1}\nСумно це чути( Тоді ти не зможеш продовжити мою історію.`;
-                            resultContainer.appendChild(newResult_1);
+                            let newQuestion_1 = document.createElement('div');
+                            newQuestion_1.className = 'question-item';
+                            newQuestion_1.textContent = "Сумно це чути( Тоді ти не зможеш продовжити мою історію.";
+                            resultContainer.appendChild(newQuestion_1);
                         } else if (path_1 === "Y") {
-                            newResult_1.textContent = `Питання: ${newQuestion.textContent} — Відповідь: ${path_1}\nРадий це чути!!! Получається це взаємно:)`;
-                            resultContainer.appendChild(newResult_1);
+                            let newQuestion_1 = document.createElement('div');
+                            newQuestion_1.className = 'question-item';
+                            newQuestion_1.textContent = "Радий це чути!!! Получається це взаємно:) На твою думку, я б хотів більше проводити часу з тобою?";
+                            resultContainer.appendChild(newQuestion_1);
 
                             setTimeout(() => {
-                                let newQuestion_2 = document.createElement('p');
-                                newQuestion_2.id = 'question';
-                                newQuestion_2.textContent = "На твою думку, я б хотів більше проводити часу з тобою?";
-                                resultContainer.appendChild(newQuestion_2);
-
+                                question = newQuestion_1;
                                 document.getElementById('answer').value = "";
                                 document.querySelector('button').onclick = function() {
                                     let path_2 = document.getElementById('answer').value.toUpperCase();
-                                    let newResult_2 = document.createElement('div');
-                                    newResult_2.className = 'result-item';
 
                                     if (path_2 === "Y") {
-                                        newResult_2.textContent = `Питання: ${newQuestion_2.textContent} — Відповідь: ${path_2}\nСаме так, я дуже тебе люблю ти в мене найгарніша дівчинка, скучаю за тобою :(`;
-                                        resultContainer.appendChild(newResult_2);
+                                        let newQuestion_2 = document.createElement('div');
+                                        newQuestion_2.className = 'question-item';
+                                        newQuestion_2.textContent = "Саме так, я дуже тебе люблю ти в мене найгарніша дівчинка, скучаю за тобою :(";
+                                        resultContainer.appendChild(newQuestion_2);
                                     } else if (path_2 === "N") {
-                                        newResult_2.textContent = `Питання: ${newQuestion_2.textContent} — Відповідь: ${path_2}\nТю Сонце ти моє, ну як так можна було подумати :(((`;
-                                        resultContainer.appendChild(newResult_2);
+                                        let newQuestion_2 = document.createElement('div');
+                                        newQuestion_2.className = 'question-item';
+                                        newQuestion_2.textContent = "Тю Сонце ти моє, ну як так можна було подумати :(((";
+                                        resultContainer.appendChild(newQuestion_2);
                                     } else {
-                                        newResult_2.textContent = `Відповідь: ${path_2}\nТи ввела щось не так, спробуй дотриматись правила вище.`;
-                                        resultContainer.appendChild(newResult_2);
+                                        let newQuestion_2 = document.createElement('div');
+                                        newQuestion_2.className = 'question-item';
+                                        newQuestion_2.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
+                                        resultContainer.appendChild(newQuestion_2);
                                     }
                                 }
                             }, 500);
                         } else {
-                            newResult_1.textContent = `Відповідь: ${path_1}\nТи ввела щось не так, спробуй дотриматись правила вище.`;
-                            resultContainer.appendChild(newResult_1);
+                            let newQuestion_1 = document.createElement('div');
+                            newQuestion_1.className = 'question-item';
+                            newQuestion_1.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
+                            resultContainer.appendChild(newQuestion_1);
                         }
                     }
                 }, 500);
             } else {
-                newResult.textContent = `Відповідь: ${path}\nТи ввела щось не так, спробуй дотриматись правила вище.`;
-                resultContainer.appendChild(newResult);
+                let newQuestion = document.createElement('div');
+                newQuestion.className = 'question-item';
+                newQuestion.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
+                resultContainer.appendChild(newQuestion);
             }
 
+            // Перемістимо поле введення та кнопку під нове питання
+            resultContainer.appendChild(document.getElementById('answer'));
+            resultContainer.appendChild(document.querySelector('button'));
+
+            // Очищаємо поле вводу після кожного питання
             document.getElementById('answer').value = "";
         }
     </script>
