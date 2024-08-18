@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерактив з Вікторією</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Привіт, Вікторія!</h1>
+    <p>Тут ми проведем невеликий інтерактив, де ти дізнаєшся щось більше про мене.<br>
+    Тільки є маленьке правило: відповідай тільки Y або N де:<br>
+    Y - це Так<br>
+    N - це Ні</p>
+
+    <p id="question">Як гадаєш, я тебе люблю?</p>
+
+    <input type="text" id="answer" maxlength="1">
+    <button onclick="startQuiz()">Відповісти</button>
+
+    <p id="result"></p>
+
+    <script>
+        function startQuiz() {
+            let path = document.getElementById('answer').value.toUpperCase();
+            let result = document.getElementById('result');
+            let question = document.getElementById('question');
+            
+            if (path === "N") {
+                result.textContent = "Сонце, навіть про таке не думай) А ну пробуй ще раз)))";
+            } else if (path === "Y") {
+                question.textContent = "Ти права! Я безмежно тебе люблю. Але чи любиш ти мене так в замін?";
+                document.querySelector('button').onclick = function() {
+                    let path_1 = document.getElementById('answer').value.toUpperCase();
+                    if (path_1 === "N") {
+                        result.textContent = "Сумно це чути( Тоді ти не зможеш продовжити мою історію.";
+                    } else if (path_1 === "Y") {
+                        question.textContent = "Радий це чути!!! Получається це взаємно:)\nНа твою думку, я б хотів більше проводити часу з тобою?";
+                        document.querySelector('button').onclick = function() {
+                            let path_2 = document.getElementById('answer').value.toUpperCase();
+                            if (path_2 === "Y") {
+                                result.textContent = "Саме так, я дуже тебе люблю ти в мене найгарніша дівчинка, скучаю за тобою :(";
+                            } else if (path_2 === "N") {
+                                result.textContent = "Тю Сонце ти моє, ну як так можна було подумати :((";
+                            } else {
+                                result.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
+                            }
+                        }
+                    } else {
+                        result.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
+                    }
+                }
+            } else {
+                result.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
+            }
+        }
+    </script>
+</body>
+</html>
