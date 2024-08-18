@@ -105,27 +105,31 @@
             questionElement.className = 'question-item';
 
             if (answer in questions[currentQuestion].options) {
+                // Показуємо відповідь
                 questionElement.textContent = questions[currentQuestion].options[answer];
                 resultContainer.insertBefore(questionElement, document.getElementById('answer'));
 
-                // Після відповіді на поточне питання додаємо нове питання
+                // Очищаємо поле вводу після кожного питання
+                document.getElementById('answer').value = "";
+
+                // Переходимо до наступного питання
                 currentQuestion += 1;
 
                 if (currentQuestion < questions.length) {
-                    setTimeout(() => {
-                        let nextQuestion = document.createElement('div');
-                        nextQuestion.className = 'question-item';
-                        nextQuestion.textContent = questions[currentQuestion].question;
-                        resultContainer.insertBefore(nextQuestion, document.getElementById('answer'));
-                    }, 500);
+                    let nextQuestion = document.createElement('div');
+                    nextQuestion.className = 'question-item';
+                    nextQuestion.textContent = questions[currentQuestion].question;
+                    resultContainer.insertBefore(nextQuestion, document.getElementById('answer'));
+                } else {
+                    document.getElementById('answer').style.display = "none";
+                    document.querySelector('button').style.display = "none";
                 }
             } else {
+                // Показуємо повідомлення про помилку
                 questionElement.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
                 resultContainer.insertBefore(questionElement, document.getElementById('answer'));
+                document.getElementById('answer').value = "";
             }
-
-            // Очищаємо поле вводу після кожного питання
-            document.getElementById('answer').value = "";
         }
     </script>
 </body>
