@@ -80,81 +80,48 @@
     </div>
 
     <script>
-        function startQuiz() {
-            let path = document.getElementById('answer').value.toUpperCase();
-            let resultContainer = document.getElementById('result-container');
-            let question = document.getElementById('question');
-
-            if (path === "N") {
-                let newQuestion = document.createElement('div');
-                newQuestion.className = 'question-item';
-                newQuestion.textContent = "Сонце, навіть про таке не думай) А ну пробуй ще раз)))";
-                resultContainer.insertBefore(newQuestion, question.nextSibling);
-            } else if (path === "Y") {
-                let newQuestion = document.createElement('div');
-                newQuestion.className = 'question-item';
-                newQuestion.textContent = "Ти права! Я безмежно тебе люблю. Але чи любиш ти мене так в замін?";
-                resultContainer.insertBefore(newQuestion, question.nextSibling);
-
-                setTimeout(() => {
-                    question = newQuestion;
-                    document.getElementById('answer').value = "";
-                    document.querySelector('button').onclick = function() {
-                        let path_1 = document.getElementById('answer').value.toUpperCase();
-
-                        if (path_1 === "N") {
-                            let newQuestion_1 = document.createElement('div');
-                            newQuestion_1.className = 'question-item';
-                            newQuestion_1.textContent = "Сумно це чути( Тоді ти не зможеш продовжити мою історію.";
-                            resultContainer.insertBefore(newQuestion_1, question.nextSibling);
-                        } else if (path_1 === "Y") {
-                            let newQuestion_1 = document.createElement('div');
-                            newQuestion_1.className = 'question-item';
-                            newQuestion_1.textContent = "Радий це чути!!! Получається це взаємно:) На твою думку, я б хотів більше проводити часу з тобою?";
-                            resultContainer.insertBefore(newQuestion_1, question.nextSibling);
-
-                            setTimeout(() => {
-                                question = newQuestion_1;
-                                document.getElementById('answer').value = "";
-                                document.querySelector('button').onclick = function() {
-                                    let path_2 = document.getElementById('answer').value.toUpperCase();
-
-                                    if (path_2 === "Y") {
-                                        let newQuestion_2 = document.createElement('div');
-                                        newQuestion_2.className = 'question-item';
-                                        newQuestion_2.textContent = "Саме так, я дуже тебе люблю ти в мене найгарніша дівчинка, скучаю за тобою :(";
-                                        resultContainer.insertBefore(newQuestion_2, question.nextSibling);
-                                    } else if (path_2 === "N") {
-                                        let newQuestion_2 = document.createElement('div');
-                                        newQuestion_2.className = 'question-item';
-                                        newQuestion_2.textContent = "Тю Сонце ти моє, ну як так можна було подумати :(((";
-                                        resultContainer.insertBefore(newQuestion_2, question.nextSibling);
-                                    } else {
-                                        let newQuestion_2 = document.createElement('div');
-                                        newQuestion_2.className = 'question-item';
-                                        newQuestion_2.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
-                                        resultContainer.insertBefore(newQuestion_2, question.nextSibling);
-                                    }
-                                }
-                            }, 500);
-                        } else {
-                            let newQuestion_1 = document.createElement('div');
-                            newQuestion_1.className = 'question-item';
-                            newQuestion_1.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
-                            resultContainer.insertBefore(newQuestion_1, question.nextSibling);
-                        }
-                    }
-                }, 500);
-            } else {
-                let newQuestion = document.createElement('div');
-                newQuestion.className = 'question-item';
-                newQuestion.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
-                resultContainer.insertBefore(newQuestion, question.nextSibling);
+        let currentQuestion = 0;
+        const questions = [
+            {
+                question: "Як гадаєш, я тебе люблю?",
+                options: {
+                    "Y": "Ти права! Я безмежно тебе люблю. Але чи любиш ти мене так в замін?",
+                    "N": "Сонце, навіть про таке не думай) А ну пробуй ще раз)))"
+                }
+            },
+            {
+                question: "Радий це чути!!! Получається це взаємно:) На твою думку, я б хотів більше проводити часу з тобою?",
+                options: {
+                    "Y": "Саме так, я дуже тебе люблю ти в мене найгарніша дівчинка, скучаю за тобою :(",
+                    "N": "Тю Сонце ти моє, ну як так можна було подумати :((("
+                }
             }
+        ];
 
-            // Перемістимо поле введення та кнопку під нове питання
-            resultContainer.appendChild(document.getElementById('answer'));
-            resultContainer.appendChild(document.querySelector('button'));
+        function startQuiz() {
+            let answer = document.getElementById('answer').value.toUpperCase();
+            let resultContainer = document.getElementById('result-container');
+            let questionElement = document.createElement('div');
+            questionElement.className = 'question-item';
+
+            if (answer in questions[currentQuestion].options) {
+                questionElement.textContent = questions[currentQuestion].options[answer];
+                resultContainer.insertBefore(questionElement, document.getElementById('answer'));
+                
+                currentQuestion += 1;
+                
+                if (currentQuestion < questions.length) {
+                    setTimeout(() => {
+                        let nextQuestion = document.createElement('div');
+                        nextQuestion.className = 'question-item';
+                        nextQuestion.textContent = questions[currentQuestion].question;
+                        resultContainer.insertBefore(nextQuestion, document.getElementById('answer'));
+                    }, 500);
+                }
+            } else {
+                questionElement.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
+                resultContainer.insertBefore(questionElement, document.getElementById('answer'));
+            }
 
             // Очищаємо поле вводу після кожного питання
             document.getElementById('answer').value = "";
