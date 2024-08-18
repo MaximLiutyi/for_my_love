@@ -34,6 +34,10 @@
             margin-top: 20px;
             font-weight: bold;
         }
+
+        #question {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -65,7 +69,7 @@
                     if (path_1 === "N") {
                         result.textContent = "Сумно це чути( Тоді ти не зможеш продовжити мою історію.";
                     } else if (path_1 === "Y") {
-                        question.textContent = "Радий це чути!!! Получається це взаємно:)\nНа твою думку, я б хотів більше проводити часу з тобою?";
+                        question.textContent = "Радий це чути!!! Получається це взаємно:) На твою думку, я б хотів більше проводити часу з тобою?";
                         document.querySelector('button').onclick = function() {
                             let path_2 = document.getElementById('answer').value.toUpperCase();
                             if (path_2 === "Y") {
