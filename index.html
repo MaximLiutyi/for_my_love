@@ -89,12 +89,12 @@
                 let newQuestion = document.createElement('div');
                 newQuestion.className = 'question-item';
                 newQuestion.textContent = "Сонце, навіть про таке не думай) А ну пробуй ще раз)))";
-                resultContainer.appendChild(newQuestion);
+                resultContainer.insertBefore(newQuestion, question.nextSibling);
             } else if (path === "Y") {
                 let newQuestion = document.createElement('div');
                 newQuestion.className = 'question-item';
                 newQuestion.textContent = "Ти права! Я безмежно тебе люблю. Але чи любиш ти мене так в замін?";
-                resultContainer.appendChild(newQuestion);
+                resultContainer.insertBefore(newQuestion, question.nextSibling);
 
                 setTimeout(() => {
                     question = newQuestion;
@@ -106,12 +106,12 @@
                             let newQuestion_1 = document.createElement('div');
                             newQuestion_1.className = 'question-item';
                             newQuestion_1.textContent = "Сумно це чути( Тоді ти не зможеш продовжити мою історію.";
-                            resultContainer.appendChild(newQuestion_1);
+                            resultContainer.insertBefore(newQuestion_1, question.nextSibling);
                         } else if (path_1 === "Y") {
                             let newQuestion_1 = document.createElement('div');
                             newQuestion_1.className = 'question-item';
                             newQuestion_1.textContent = "Радий це чути!!! Получається це взаємно:) На твою думку, я б хотів більше проводити часу з тобою?";
-                            resultContainer.appendChild(newQuestion_1);
+                            resultContainer.insertBefore(newQuestion_1, question.nextSibling);
 
                             setTimeout(() => {
                                 question = newQuestion_1;
@@ -123,17 +123,17 @@
                                         let newQuestion_2 = document.createElement('div');
                                         newQuestion_2.className = 'question-item';
                                         newQuestion_2.textContent = "Саме так, я дуже тебе люблю ти в мене найгарніша дівчинка, скучаю за тобою :(";
-                                        resultContainer.appendChild(newQuestion_2);
+                                        resultContainer.insertBefore(newQuestion_2, question.nextSibling);
                                     } else if (path_2 === "N") {
                                         let newQuestion_2 = document.createElement('div');
                                         newQuestion_2.className = 'question-item';
                                         newQuestion_2.textContent = "Тю Сонце ти моє, ну як так можна було подумати :(((";
-                                        resultContainer.appendChild(newQuestion_2);
+                                        resultContainer.insertBefore(newQuestion_2, question.nextSibling);
                                     } else {
                                         let newQuestion_2 = document.createElement('div');
                                         newQuestion_2.className = 'question-item';
                                         newQuestion_2.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
-                                        resultContainer.appendChild(newQuestion_2);
+                                        resultContainer.insertBefore(newQuestion_2, question.nextSibling);
                                     }
                                 }
                             }, 500);
@@ -141,7 +141,7 @@
                             let newQuestion_1 = document.createElement('div');
                             newQuestion_1.className = 'question-item';
                             newQuestion_1.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
-                            resultContainer.appendChild(newQuestion_1);
+                            resultContainer.insertBefore(newQuestion_1, question.nextSibling);
                         }
                     }
                 }, 500);
@@ -149,7 +149,7 @@
                 let newQuestion = document.createElement('div');
                 newQuestion.className = 'question-item';
                 newQuestion.textContent = "Ти ввела щось не так, спробуй дотриматись правила вище.";
-                resultContainer.appendChild(newQuestion);
+                resultContainer.insertBefore(newQuestion, question.nextSibling);
             }
 
             // Перемістимо поле введення та кнопку під нове питання
